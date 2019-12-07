@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApplication1.Controllers
+
+namespace MovieViewer.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public  async Task<ActionResult> Index()
         {
+            MovieDBapiClient moviesClient = new MovieDBapiClient();
+            var res =  await moviesClient.GetPopularMovies();
             return View();
         }
 
@@ -26,5 +30,7 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        
     }
 }
