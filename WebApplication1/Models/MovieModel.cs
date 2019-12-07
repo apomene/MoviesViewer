@@ -52,6 +52,3 @@ namespace MovieViewer.Models
 }
 
 
-///{"aspect_ratio":0.7066508313539193,"file_path":"/gZCJZOn4l0Zj5hAxsMbxoS6CL0u.jpg","height":842,"iso_639_1":"en","vote_average":5.388,"vote_count":4,"width":595
-
-

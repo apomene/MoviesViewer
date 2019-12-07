@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MovieViewer.ViewModel;
 
 
 namespace MovieViewer.Controllers
@@ -15,24 +16,13 @@ namespace MovieViewer.Controllers
         
         public  async Task<ActionResult> Index()
         {
-            //MovieModel movies = new MovieModel();
+            MoviesViewModel model = new MoviesViewModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
             var movies =  await moviesClient.GetPopularMovies(1);
             var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
-            for (int i = 1; i < 10000; i++)
-            {
-                var movieImage = await moviesClient.GetMoviePoster(i);
-                if (movieImage != null)
-                {
-                    var image = JsonConvert.DeserializeObject<MovieModel.ImageObject>(movieImage);
-                    if (image.posters.Any())
-                    {
-                        string chexk = "1";
-                    }
-                }
-            }
-           
-            return View();
+            model.movies = res.results;
+
+            return View(model);
         }
 
         public ActionResult About()

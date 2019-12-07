@@ -11,6 +11,7 @@ namespace MovieViewer
     {
         private string _apiKey = "9198fa6d9a9713bc6b03ee9582525917";
         private string _baseURL = "https://api.themoviedb.org/3/movie";
+        private string _inageURL = "https://image.tmdb.org/t/p/w500/";
 
         internal  async Task<string> GetPopularMovies(int page=1)
         {
