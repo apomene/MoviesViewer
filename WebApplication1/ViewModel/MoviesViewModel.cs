@@ -9,5 +9,6 @@ namespace MovieViewer.ViewModel
     public class MoviesViewModel
     {
         public List<MovieModel.Movie> movies { get; set; }
+        public int pageNum { get; set; } = 1;
     }
 }
