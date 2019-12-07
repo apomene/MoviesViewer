@@ -15,11 +15,23 @@ namespace MovieViewer.Controllers
         
         public  async Task<ActionResult> Index()
         {
-            MovieModel movies = new MovieModel();
+            //MovieModel movies = new MovieModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
-            var res =  await moviesClient.GetPopularMovies();
-            JsonConvert.DeserializeObject<MovieModel.MoviePage>(res);
-            movies.
+            var movies =  await moviesClient.GetPopularMovies(1);
+            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
+            for (int i = 1; i < 10000; i++)
+            {
+                var movieImage = await moviesClient.GetMoviePoster(i);
+                if (movieImage != null)
+                {
+                    var image = JsonConvert.DeserializeObject<MovieModel.ImageObject>(movieImage);
+                    if (image.posters.Any())
+                    {
+                        string chexk = "1";
+                    }
+                }
+            }
+           
             return View();
         }
 
