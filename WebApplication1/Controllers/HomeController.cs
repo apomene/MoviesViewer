@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MovieViewer.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +12,14 @@ namespace MovieViewer.Controllers
 {
     public class HomeController : Controller
     {
+        
         public  async Task<ActionResult> Index()
         {
+            MovieModel movies = new MovieModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
             var res =  await moviesClient.GetPopularMovies();
+            JsonConvert.DeserializeObject<MovieModel.MoviePage>(res);
+            movies.
             return View();
         }
 
