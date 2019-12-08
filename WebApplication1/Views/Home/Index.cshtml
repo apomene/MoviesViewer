@@ -14,22 +14,40 @@
         <!-- Panel body -->
         <div class="panel-body">
 
-            @*<div class="row">
+            <div class="row">
                 <!---Popular Movies List-->
-                @foreach (var item in Model.movies)
-                {
+                <div class="col-lg-6">
+                    @foreach (var item in Model.movies)
+                    {
+                        <div id="@item.id">
+                            @item.title<br />
+                        </div>
+                    }
+                    <label hidden id="pageNum">@Model.pageNum</label>
                     <div class="col-lg-3">
-                        @item.title<br />
+                        <button id="first" class="btn btn-default">First</button>
                     </div>
-                    <div class="col-lg-9">
-                        <img src="https://image.tmdb.org/t/p/w342/@item.poster_path" />
+                    <div class="col-lg-3"><button id="previous" class="btn btn-default">Previous</button></div>
+                    <div class="col-lg-3">
+                        @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default" });
+                        @*<button id="next" class="btn btn-default">Next</button>*@
                     </div>
-                }
+                    <div class="col-lg-3"><button id="last" class="btn btn-default">Last</button></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-6">
+                        <h2 id="movieTitle"></h2>
+                        <img id="imagePoster" src="https://image.tmdb.org/t/p/w342/@Model.movies.Where(m=>m.id == 22).Select(m=>m.poster_path).FirstOrDefault()" />
+                        <p id="movieDescr">@Model.movies.Where(m => m.id == 467).Select(m => m.overview).FirstOrDefault()</p>
+                    </div>
+                </div>
+
+
                 <!--Select Move Description and poster-->
 
-            </div>*@
+            </div>
 
-                <div class="row">
+                @*<div class="row">
                     <div class="col-lg-6">
                         <table id="MoviesTable" class="table table-bordered nowrap dataTable dtr-inline" style="width:100%;overflow:auto;text-align:left" role="grid" aria-describedby="MoviesTable">
                             <thead>
@@ -59,7 +77,7 @@
                         <img id="imagePoster" src="https://image.tmdb.org/t/p/w342/@Model.movies.Where(m=>m.id == 4).Select(m=>m.poster_path).FirstOrDefault()" />
                         <div id="movieDescr">@Model.movies.Where(m => m.id == 467).Select(m => m.overview).FirstOrDefault()</div>
                     </div>
-                </div>       
+                </div>*@       
         </div>
     </div>
 </div>

@@ -14,14 +14,14 @@ namespace MovieViewer.Controllers
     public class HomeController : Controller
     {
         
-        public  async Task<ActionResult> Index()
+        public  async Task<ActionResult> Index(int page=1)
         {
             MoviesViewModel model = new MoviesViewModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
-            var movies = await moviesClient.GetPopularMovies(1);
+            var movies = await moviesClient.GetPopularMovies(page);
             var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
             model.movies = res.results;
-            model.pageNum = 1;
+            model.pageNum = page;
             return View(model);
         }
 
