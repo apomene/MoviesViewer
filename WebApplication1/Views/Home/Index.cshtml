@@ -1,9 +1,10 @@
-﻿@{
+﻿@using System.Linq
+
+@{
     ViewBag.Title = "Movie Viewer";
 }
 
 @model MovieViewer.ViewModel.MoviesViewModel
-
 
 <div class="row">
     <div class="col-sm-12 panel panel-info">
@@ -19,26 +20,35 @@
                 <div class="col-lg-6">
                     @foreach (var item in Model.movies)
                     {
-                        <div id="@item.id">
-                            @item.title<br />
-                        </div>
+                    <div id="@item.id" onclick="loadImage(this)">
+                        <label hidden id="@item.id poster">@item.poster_path</label>
+                        <label hidden id="@item.id overview">@item.overview</label>
+                        <label hidden id="@item.id title">@item.title</label>
+                        @item.title<br />
+                    </div>
                     }
                     <label hidden id="pageNum">@Model.pageNum</label>
-                    <div class="col-lg-3">
-                        <button id="first" class="btn btn-default">First</button>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2">
+                        @Html.ActionLink("First", "Index", "Home", new { page = 1 }, new { @class = "btn btn-default" })
                     </div>
-                    <div class="col-lg-3"><button id="previous" class="btn btn-default">Previous</button></div>
-                    <div class="col-lg-3">
-                        @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default" });
-                        @*<button id="next" class="btn btn-default">Next</button>*@
+                    <div class="col-lg-2">
+                        @Html.ActionLink("Previous", "Index", "Home", new { page = Model.pageNum - 1 }, new { @class = "btn btn-default" })
                     </div>
-                    <div class="col-lg-3"><button id="last" class="btn btn-default">Last</button></div>
+                    <div class="col-lg-2">
+                        @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default" })
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ActionLink("Last", "Index", "Home", new { page = 500 }, new { @class = "btn btn-default" })
+                    </div>
+                    <div class="col-lg-2"></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-lg-6">
+                        <label id="selMovieId" hidden>@Model.selectedMovieID</label>
                         <h2 id="movieTitle"></h2>
-                        <img id="imagePoster" src="https://image.tmdb.org/t/p/w342/@Model.movies.Where(m=>m.id == 22).Select(m=>m.poster_path).FirstOrDefault()" />
-                        <p id="movieDescr">@Model.movies.Where(m => m.id == 467).Select(m => m.overview).FirstOrDefault()</p>
+                        <img id="imagePoster" src="" />
+                        <p id="movieDescr"></p>
                     </div>
                 </div>
 
@@ -47,7 +57,7 @@
 
             </div>
 
-                @*<div class="row">
+            @*<div class="row">
                     <div class="col-lg-6">
                         <table id="MoviesTable" class="table table-bordered nowrap dataTable dtr-inline" style="width:100%;overflow:auto;text-align:left" role="grid" aria-describedby="MoviesTable">
                             <thead>
@@ -77,7 +87,7 @@
                         <img id="imagePoster" src="https://image.tmdb.org/t/p/w342/@Model.movies.Where(m=>m.id == 4).Select(m=>m.poster_path).FirstOrDefault()" />
                         <div id="movieDescr">@Model.movies.Where(m => m.id == 467).Select(m => m.overview).FirstOrDefault()</div>
                     </div>
-                </div>*@       
+                </div>*@
         </div>
     </div>
 </div>

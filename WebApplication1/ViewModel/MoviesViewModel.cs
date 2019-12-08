@@ -10,6 +10,7 @@ namespace MovieViewer.ViewModel
     {
         public List<MovieModel.Movie> movies { get; set; }
         public int pageNum { get; set; } = 1;
+        public int selectedMovieID { get; set; }
 
     }
 }

@@ -16,6 +16,7 @@ namespace MovieViewer.Controllers
         
         public  async Task<ActionResult> Index(int page=1)
         {
+            page = page <= 0 ? 1 : page;
             MoviesViewModel model = new MoviesViewModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
             var movies = await moviesClient.GetPopularMovies(page);

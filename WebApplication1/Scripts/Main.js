@@ -38,7 +38,21 @@ $(document).ready(function () {
     });
 });
 
-   
+
+function loadImage(el) {
+    var selectedPoster = el.id + ' poster';
+    var selectedOverview = el.id + ' overview';
+    var selectedTitle = el.id + ' title';
+
+    $('#selMovieId').text(el.id);
+    var imageParh = "https://image.tmdb.org/t/p/w342/" + document.getElementById(selectedPoster).textContent;
+    $("#imagePoster").attr("src", imageParh);
+    var description = document.getElementById(selectedOverview).textContent;
+    $('#movieDescr').html(description);
+    var title = document.getElementById(selectedTitle).textContent;
+    $('#movieTitle').html(title);
+}
+
 
 $('#next').click(function () {
     var num = parseInt($('#pageNum').text());
