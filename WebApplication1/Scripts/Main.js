@@ -4,9 +4,12 @@ $(document).ready(function () {
 
     $('#MoviesTable').DataTable(
         {
-            "columnDefs": [{
-                "targets": -1,
-            }],
+            "columns": [
+                { "visible": false},
+                { "visible": false },
+                { "visible": false },
+                null
+            ],
             "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]],
             "dom": 'lBfrtip',
             "select": {
@@ -20,11 +23,18 @@ $(document).ready(function () {
     $(function () {
         $('[rel=tooltip]').tooltip({ trigger: "hover" });
     });
-
+   
     loadTable();
 
     $('#MoviesTable tbody').on('click', 'tr', function () {
+        var table = $('#MoviesTable').DataTable();
         $(this).toggleClass('selected');
+        var selectedRow = table.row(this).data();
+        var imageParh = "https://image.tmdb.org/t/p/w342/" + selectedRow[1];
+        $("#imagePoster").attr("src", imageParh);
+        var description = selectedRow[2];
+        $('#movieDescr').html(description);
+        $('#movieTitle').html(selectedRow[3]);
     });
 });
 

@@ -17,10 +17,10 @@ namespace MovieViewer.Controllers
         public  async Task<ActionResult> Index()
         {
             MoviesViewModel model = new MoviesViewModel();
-            //MovieDBapiClient moviesClient = new MovieDBapiClient();
-            //var movies = await moviesClient.GetPopularMovies(1);
-            //var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
-            //model.movies = res.results;
+            MovieDBapiClient moviesClient = new MovieDBapiClient();
+            var movies = await moviesClient.GetPopularMovies(1);
+            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
+            model.movies = res.results;
             model.pageNum = 1;
             return View(model);
         }
@@ -34,7 +34,7 @@ namespace MovieViewer.Controllers
             List<string[]> response = new List<string[]>();
             foreach (var movie in res.results)
             {
-                response.Add(new string[] { movie.id.ToString(), movie.title });
+                response.Add(new string[] { movie.id.ToString(),movie.poster_path,movie.overview, movie.title });
             }
 
             return Json(response);
