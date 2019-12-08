@@ -44,3 +44,18 @@ textarea {
     background-color: cornflowerblue;
     color:white;
 }
+
+.title {
+    border: solid;
+    border-color: white;
+    border-bottom-color:cornflowerblue;
+}
+
+.Overview-bordered{
+    background-color:lightgray;
+    border:solid;
+    border-color:darkgray;
+}
+
+
+

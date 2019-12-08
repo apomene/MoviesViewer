@@ -16,38 +16,30 @@ namespace MovieViewer.Controllers
         
         public  async Task<ActionResult> Index(int page=1)
         {
-            page = page <= 0 ? 1 : page;
-            page = page >=500 ? 500 : page;
             MoviesViewModel model = new MoviesViewModel();
-            MovieDBapiClient moviesClient = new MovieDBapiClient();
-            var movies = await moviesClient.GetPopularMovies(page);
-            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
-            model.movies = res.results;
-            model.pageNum = page;
-            model.selectedMovieID = model.movies.Select(m => m.id).FirstOrDefault();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult>  GetMovies(int page)
-        {
-            MovieDBapiClient moviesClient = new MovieDBapiClient();
-            List<string[]> response = new List<string[]>();
-            var movies = await moviesClient.GetPopularMovies(page);
-            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
-            foreach (var movie in res.results)
+            try
             {
-                response.Add(new string[] { movie.id.ToString(), movie.poster_path, movie.overview, movie.title });
+                page = page <= 0 ? 1 : page;
+                page = page >= 500 ? 500 : page;
+            
+                MovieDBapiClient moviesClient = new MovieDBapiClient();
+                var movies = await moviesClient.GetPopularMovies(page);
+                var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
+                model.movies = res.results;
+                model.pageNum = page;
+                model.selectedMovieID = model.movies.Select(m => m.id).FirstOrDefault();
+                return View(model);
             }
-            return Json(response);
+            catch(Exception ex)
+            {
+                //TO DO: Log maybe
+                return View("Error");
+            }         
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        
 
-            return View();
-        }
+     
 
         
     }
