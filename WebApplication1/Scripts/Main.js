@@ -10,7 +10,7 @@ $(document).ready(function () {
                 { "visible": false },
                 null
             ],
-            "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]],
+            //"lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]],
             "dom": 'lBfrtip',
             "select": {
                 style: 'multi'
@@ -24,11 +24,11 @@ $(document).ready(function () {
         $('[rel=tooltip]').tooltip({ trigger: "hover" });
     });
    
-    loadTable();
+    loadTable(1);
 
     $('#MoviesTable tbody').on('click', 'tr', function () {
         var table = $('#MoviesTable').DataTable();
-        $(this).toggleClass('selected');
+        //$(this).toggleClass('selected');
         var selectedRow = table.row(this).data();
         var imageParh = "https://image.tmdb.org/t/p/w342/" + selectedRow[1];
         $("#imagePoster").attr("src", imageParh);
@@ -40,18 +40,20 @@ $(document).ready(function () {
 
    
 
-//$('#next').click(function () {
-//    var num = $('#pageNum').val();
-//    loadTable(num + 1);
-//});
+$('#next').click(function () {
+    var num = parseInt($('#pageNum').text());
+    var nextPage = num++;
+    //$('#pageNum').text(nextPage);
+    loadTable(nextPage);
+});
 
-function loadTable() {  //load Movies DataTable   
+function loadTable(pageNum) {  //load Movies DataTable   
 
     var url = "/Home/GetMovies";
     $.ajax({
         url: url,
         type: 'POST',
-        //data: {"page":1},
+        data: { "page": pageNum},
         dataType: 'json',
         success: function (data) {
             $('#MoviesTable').DataTable().clear();
@@ -61,6 +63,7 @@ function loadTable() {  //load Movies DataTable
                 }
             }
             $('#MoviesTable').DataTable().draw();
+            $('#pageNum').text(pageNum);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert('eror: \xa0\xa0' + thrownError);

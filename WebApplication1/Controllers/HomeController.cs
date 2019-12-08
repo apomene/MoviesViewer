@@ -26,17 +26,16 @@ namespace MovieViewer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>  GetMovies()
+        public async Task<ActionResult>  GetMovies(int page)
         {
             MovieDBapiClient moviesClient = new MovieDBapiClient();
-            var movies = await moviesClient.GetPopularMovies(5);
-            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
             List<string[]> response = new List<string[]>();
+            var movies = await moviesClient.GetPopularMovies(page);
+            var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
             foreach (var movie in res.results)
             {
-                response.Add(new string[] { movie.id.ToString(),movie.poster_path,movie.overview, movie.title });
+                response.Add(new string[] { movie.id.ToString(), movie.poster_path, movie.overview, movie.title });
             }
-
             return Json(response);
         }
 
