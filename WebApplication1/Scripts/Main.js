@@ -21,4 +21,10 @@ function loadImage(id) {
     $('#movieDescr').html(description);
     var title = document.getElementById(selectedTitle).textContent;
     $('#movieTitle').html(title);
+    var allTitles = document.getElementsByClassName('titleList');
+    for (let i = 0; i < allTitles.length; i++) {
+        var elelment = document.getElementById(allTitles[i].id);
+        elelment.classList.remove('titleListSelected');
+    }
+    $('#' + id).addClass('titleListSelected');
 }

@@ -31,3 +31,16 @@ textarea {
 .pageBtn {
     width:81px !important;
 }
+
+.titleList {
+    font-size: 16px;
+    border: solid;
+    border-color: white;
+    border-bottom-color: cornflowerblue;
+}
+
+.titleListSelected {
+    /*font-size: 20px;*/
+    background-color: cornflowerblue;
+    color:white;
+}

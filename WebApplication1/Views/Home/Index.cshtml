@@ -20,28 +20,31 @@
                 <div class="col-lg-4">
                     @foreach (var item in Model.movies)
                     {
-                        <div id="@item.id" onclick="loadImage(id)">
+                        <div class="titleList" id="@item.id" onclick="loadImage(id)">
                             <label hidden id="@item.id poster">@item.poster_path</label>
                             <label hidden id="@item.id overview">@item.overview</label>
                             <label hidden id="@item.id title">@item.title</label>
                             @item.title<br />
                         </div>
                     }
-                    <label hidden id="pageNum">@Model.pageNum</label>
+                    <hr style="height:5px" />
+
                     @*<div class="col-lg-2"></div>*@
 
-                    <div class="col-lg-3">
+                    <div class="col-xs-3">
                         @Html.ActionLink("First", "Index", "Home", new { page = 1 }, new { @class = "btn btn-default pageBtn" })
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-3">
                         @Html.ActionLink("Previous", "Index", "Home", new { page = Model.pageNum - 1 }, new { @class = "btn btn-default pageBtn" })
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-3">
                         @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default pageBtn" })
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-3">
                         @Html.ActionLink("Last", "Index", "Home", new { page = 500 }, new { @class = "btn btn-default pageBtn" })
                     </div>
+                    <hr style="height:5px" />
+                    <label hidden id="pageNum">@Model.pageNum</label>
                     <div class="centerAl"> Page - @Model.pageNum</div>
                 </div>
                 <div class="col-lg-8">
