@@ -6,11 +6,11 @@
 
 @model MovieViewer.ViewModel.MoviesViewModel
 
-<div class="row">
+<div class="row" style="background-color:black">
     <div class="col-sm-12 panel panel-info">
         <!-- Panel title -->
-        <div class="panel-heading" style="text-align:center">
-            Movie Viewer
+        <div class="panel-heading centerAl">
+            Movie Viewer  Page - @Model.pageNum
         </div>
         <!-- Panel body -->
         <div class="panel-body">
@@ -44,18 +44,18 @@
                         @Html.ActionLink("Last", "Index", "Home", new { page = 500 }, new { @class = "btn btn-default pageBtn" })
                     </div>
                     <hr style="height:5px" />
-                    <label hidden id="pageNum">@Model.pageNum</label>
-                    <div class="centerAl"> Page - @Model.pageNum</div>
+
                 </div>
                 <div class="col-lg-8">
                     <div class="col-lg-6">
                         <label id="selMovieId" hidden>@Model.selectedMovieID</label>
-                        <h2  id="movieTitle"></h2>
+                        <h2 id="movieTitle"></h2>
                         <img id="imagePoster" src="" />
                         <p id="movieDescr"></p>
                     </div>
                 </div>
-            </div>       
+            </div>
+        </div>
     </div>
 </div>
 
