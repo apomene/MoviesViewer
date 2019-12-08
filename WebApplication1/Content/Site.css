@@ -20,5 +20,14 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 280px ;
+}
+
+/* -------------------------Custom Styling ---------------------*/
+.centerAl {
+    text-align:center !important;
+}
+
+.pageBtn {
+    width:81px !important;
 }

@@ -22,29 +22,21 @@ $(document).ready(function () {
     );
     $(function () {
         $('[rel=tooltip]').tooltip({ trigger: "hover" });
-    });
-   
-    loadTable(1);
-
-    $('#MoviesTable tbody').on('click', 'tr', function () {
-        var table = $('#MoviesTable').DataTable();
-        //$(this).toggleClass('selected');
-        var selectedRow = table.row(this).data();
-        var imageParh = "https://image.tmdb.org/t/p/w342/" + selectedRow[1];
-        $("#imagePoster").attr("src", imageParh);
-        var description = selectedRow[2];
-        $('#movieDescr').html(description);
-        $('#movieTitle').html(selectedRow[3]);
-    });
+    });  
+    loadInitImage();   
 });
 
+function loadInitImage() {
+    var id = $('#selMovieId').text();
+    loadImage(id);
+}
 
-function loadImage(el) {
-    var selectedPoster = el.id + ' poster';
-    var selectedOverview = el.id + ' overview';
-    var selectedTitle = el.id + ' title';
+function loadImage(id) {
+    var selectedPoster = id + ' poster';
+    var selectedOverview = id + ' overview';
+    var selectedTitle = id + ' title';
 
-    $('#selMovieId').text(el.id);
+    $('#selMovieId').text(id);
     var imageParh = "https://image.tmdb.org/t/p/w342/" + document.getElementById(selectedPoster).textContent;
     $("#imagePoster").attr("src", imageParh);
     var description = document.getElementById(selectedOverview).textContent;
@@ -52,6 +44,9 @@ function loadImage(el) {
     var title = document.getElementById(selectedTitle).textContent;
     $('#movieTitle').html(title);
 }
+
+
+
 
 
 $('#next').click(function () {

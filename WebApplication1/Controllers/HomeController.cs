@@ -17,12 +17,14 @@ namespace MovieViewer.Controllers
         public  async Task<ActionResult> Index(int page=1)
         {
             page = page <= 0 ? 1 : page;
+            page = page >=500 ? 500 : page;
             MoviesViewModel model = new MoviesViewModel();
             MovieDBapiClient moviesClient = new MovieDBapiClient();
             var movies = await moviesClient.GetPopularMovies(page);
             var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
             model.movies = res.results;
             model.pageNum = page;
+            model.selectedMovieID = model.movies.Select(m => m.id).FirstOrDefault();
             return View(model);
         }
 
