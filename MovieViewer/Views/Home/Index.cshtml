@@ -20,12 +20,21 @@
                 <div class="col-lg-4">
                     @foreach (var item in Model.movies)
                     {
-                        <div class="titleList" id="@item.id" onclick="loadImage(id)">
-                            <label hidden id="@item.id poster">@item.poster_path</label>
-                            <label hidden id="@item.id overview">@item.overview</label>
-                            <label hidden id="@item.id title">@item.title</label>
-                            @item.title<br />
+                        <div class=" titleList" id="@item.id" onclick="loadDetails(id)">
+
+                            @item.title
                         </div>
+
+                        <label hidden id="@item.id poster">@item.poster_path</label>
+                        <label hidden id="@item.id overview">@item.overview</label>
+                        <label hidden id="@item.id title">@item.title</label>
+                        <label hidden id=" @item.id release">@item.release_date</label>
+                        <label hidden id=" @item.id rating">@item.vote_average</label>
+                        foreach (var genre in item.genre_ids)
+                        {
+                            <label hidden class="@item.id gennres-ids">@genre</label>
+                        }
+
                     }
                     <hr style="height:5px" />
 
@@ -56,7 +65,24 @@
                             <img id="imagePoster" src="" />
                         </div>
                         <div class="col-md-6">
-                            <p id="movieDescr"></p>
+                            <h3 class="row centerAl">Overview</h3>
+                            <div class="row">
+                                <p id="movieDescr"></p>
+                            </div>
+                            <hr style="height:5px" />
+                            <div class="row">
+                                <div  class="col-sm-4">
+                                    Rating:
+                                    <span id="rating" class="badge badge-pill badge-success rating"></span>
+                                </div>
+                                <div id="genres" class=" col-sm-8"> 
+                                    Genres:
+                                    <span class="badge badge-primary gennres-tag">Thriller</span>
+                                    <span class="badge badge-primary gennres-tag">Action</span>
+                                    <span class="badge badge-primary gennres-tag">Drama</span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                    
