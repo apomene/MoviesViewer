@@ -48,6 +48,17 @@ namespace MovieViewer.Models
             public float vote_average { get; set; }
             public int vote_count { get; set; }
         }
+
+        public class Genres
+        {
+            public List<Genre> genres { get; set; }
+        }
+
+        public class Genre
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+        }
     }
 }
 

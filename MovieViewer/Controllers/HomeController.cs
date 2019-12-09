@@ -13,8 +13,8 @@ namespace MovieViewer.Controllers
 {
     public class HomeController : Controller
     {
-        
-        public  async Task<ActionResult> Index(int page=1)
+        MovieDBapiClient moviesClient = new MovieDBapiClient();
+        public async Task<ActionResult> Index(int page=1)
         {
             MoviesViewModel model = new MoviesViewModel();
             try
@@ -22,7 +22,7 @@ namespace MovieViewer.Controllers
                 page = page <= 0 ? 1 : page;
                 page = page >= 500 ? 500 : page;
             
-                MovieDBapiClient moviesClient = new MovieDBapiClient();
+               
                 var movies = await moviesClient.GetPopularMovies(page);
                 var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
                 model.movies = res.results;
@@ -37,10 +37,23 @@ namespace MovieViewer.Controllers
             }         
         }
 
-        
+        [HttpPost]
+        public async Task<ActionResult> GetGenreNames(int[] genresIds)
+        {
+            List<string> result = new List<string>();
+            try
+            {
+                var genreNames = await moviesClient.GetGenreNames();
+                var res = JsonConvert.DeserializeObject<MovieModel.Genres>(genreNames);
+                
+                result = res.genres.Where(g => genresIds.Contains(g.id)).Select(g => g.name).ToList();
+            }
+            catch
+            {
+                return Json("Server Error, could not retrieve genre names");
+            }
 
-     
-
-        
+            return Json(result);
+        }
     }
 }

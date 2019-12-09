@@ -20,7 +20,7 @@ function loadDetails(id) {
     for (let i = 0; i < genres.length; i++) {
         genresIds.push(genres[i].textContent);
     }
-    console.log(genresIds);
+    getGenreNames(genresIds);
     $('#selMovieId').text(id);
     var imageParh = "https://image.tmdb.org/t/p/w342/" + document.getElementById(selectedPoster).textContent;
     $("#imagePoster").attr("src", imageParh);
@@ -41,8 +41,31 @@ function loadDetails(id) {
     $('#' + id).addClass('titleListSelected');
 }
 
+function getGenreNames(genresIds) {
 
-
-function getGenreNames() {
-
+    $.ajax({
+        timeout: 10000,
+        type: "POST",
+        url: "/Home/GetGenreNames",
+        traditional: true,
+        data: { 'genresIds': genresIds },         
+        success: function (data) {
+            for (var name in data) {
+                var newDiv = document.createElement("div");
+                var newContent = document.createTextNode(data[name]);
+                // add the text node to the newly created div
+                //newDiv.appendChild(newContent);  
+                // add the newly created element and its content into the DOM 
+                var currentDiv = document.getElementById("genres");
+                currentDiv.appendChild(newContent);  
+                //document.body.insertBefore(newDiv, currentDiv); 
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert('AJAX error:' + thrownError);
+        },
+        complete: function () {
+            
+        }
+    });
 }
