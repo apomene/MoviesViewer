@@ -18,7 +18,7 @@ namespace MovieViewer.Models
         public class Movie
         {
             public float popularity { get; set; }
-            public int votes_count { get; set; }
+            public int vote_count { get; set; }
             public string poster_path { get; set; }
             public int id { get; set; }
             public bool adult { get; set; }

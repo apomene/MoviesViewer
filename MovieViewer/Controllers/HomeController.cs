@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using MovieViewer.ViewModel;
 
@@ -21,8 +20,7 @@ namespace MovieViewer.Controllers
             {
                 page = page <= 0 ? 1 : page;
                 page = page >= 500 ? 500 : page;
-            
-               
+                           
                 var movies = await moviesClient.GetPopularMovies(page);
                 var res = JsonConvert.DeserializeObject<MovieModel.MoviePage>(movies);
                 model.movies = res.results;
@@ -55,5 +53,24 @@ namespace MovieViewer.Controllers
 
             return Json(result);
         }
+       /// <summary>
+       /// Calculate weighted rating based bot on votes count and votes average
+       /// </summary>
+       /// <param name="votes">votes count</param>
+       /// <param name="votesAverage">votes average</param>
+        private void WeightedRating(int votes,float votesAverage)
+        {
+            try
+            {
+                //TO DO
+
+            }
+            catch (Exception ex)
+            {
+                //TO DO: Log maybe
+            }
+        }
+
+       
     }
 }

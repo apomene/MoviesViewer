@@ -30,6 +30,7 @@
                         <label hidden id="@item.id title">@item.title</label>
                         <label hidden id=" @item.id release">@item.release_date</label>
                         <label hidden id=" @item.id rating">@item.vote_average</label>
+                        <label hidden id=" @item.id votes">@item.vote_count</label>
                         foreach (var genre in item.genre_ids)
                         {
                             <label hidden class="@item.id gennres-ids">@genre</label>
