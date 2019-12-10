@@ -1,7 +1,7 @@
-﻿'use strict'
+﻿'use strict';
 
 $(document).ready(function () {
-    loadInit();   
+    loadInit();
 });
 
 function loadInit() {
@@ -15,7 +15,7 @@ function loadDetails(id) {
     var selectedTitle = id + ' title';
     var selectedDate = id + ' release';
     var selectedRating = id + ' rating';
-    var genres = document.getElementsByClassName(id+' gennres-ids');
+    var genres = document.getElementsByClassName(id + ' gennres-ids');
     var genresIds = [];
     for (let i = 0; i < genres.length; i++) {
         genresIds.push(genres[i].textContent);
@@ -29,16 +29,9 @@ function loadDetails(id) {
     var title = document.getElementById(selectedTitle).textContent;
     var releaseDate = document.getElementById(selectedDate).textContent;
     $('#movieTitle').html(title + ' (' + releaseDate.split('-')[0] + ')');
-   
     var rating = document.getElementById(selectedRating).textContent;
     $('#rating').html(rating);
-    /// Highlight Selected movie: remove class titleListSelected from all and then assign to selected movie
-    var allTitles = document.getElementsByClassName('titleList');
-    for (let i = 0; i < allTitles.length; i++) {
-        var elelment = document.getElementById(allTitles[i].id);
-        elelment.classList.remove('titleListSelected');
-    }
-    $('#' + id).addClass('titleListSelected');
+    HighlightSelection(id);
 }
 
 function getGenreNames(genresIds) {
@@ -48,24 +41,46 @@ function getGenreNames(genresIds) {
         type: "POST",
         url: "/Home/GetGenreNames",
         traditional: true,
-        data: { 'genresIds': genresIds },         
+        data: { 'genresIds': genresIds },
         success: function (data) {
-            for (var name in data) {
-                var newDiv = document.createElement("div");
-                var newContent = document.createTextNode(data[name]);
-                // add the text node to the newly created div
-                //newDiv.appendChild(newContent);  
-                // add the newly created element and its content into the DOM 
-                var currentDiv = document.getElementById("genres");
-                currentDiv.appendChild(newContent);  
-                //document.body.insertBefore(newDiv, currentDiv); 
-            }
+            CreateGenreElements(data);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert('AJAX error:' + thrownError);
         },
         complete: function () {
-            
+
         }
     });
 }
+
+function CreateGenreElements(data) {
+    var genreDiv = document.getElementById("genres");
+    //1st we remove all existing genre elements
+    while (genreDiv.firstChild) {
+        genreDiv.removeChild(genreDiv.firstChild);
+    }
+    var newSpan = document.createElement('span'); 
+    newSpan.innerHTML = 'Genres:';
+    genreDiv.appendChild(newSpan);
+    for (var name in data) {    
+        ///we add new genres to a new div and 
+        //add the newly created element and its content into the DOM
+        var newDiv = document.createElement('div');
+        newDiv.className += 'badge badge-primary gennres-tag';
+        newDiv.innerHTML = data[name];
+        genreDiv.appendChild(newDiv);
+    }
+    
+}
+
+function HighlightSelection(id) {
+    /// Highlight Selected movie: remove class titleListSelected from all and then assign to selected movie
+    var allTitles = document.getElementsByClassName('titleList');
+    for (let i = 0; i < allTitles.length; i++) {
+        var elelment = document.getElementById(allTitles[i].id);
+        elelment.classList.remove('titleListSelected');
+    }
+    $('#' + id).addClass('titleListSelected');
+}
+
