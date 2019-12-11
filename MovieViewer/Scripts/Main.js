@@ -59,7 +59,7 @@ function getGenreNames(genresIds) {
             CreateGenreElements(data);
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            alert('AJAX error:' + thrownError);
+            //alert('AJAX error:' + thrownError);
         },
         complete: function () {
 
