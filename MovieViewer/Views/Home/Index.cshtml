@@ -9,51 +9,58 @@
 <div class="row" style="background-color:black">
     <div class="col-sm-12 panel panel-info">
         <!-- Panel title -->
-        <div class="panel-heading centerAl">
-            Movie Viewer  Page - @Model.pageNum
-        </div>
+        <h2 class="panel-heading centerAl">
+            Movie Viewer - Popular Movies
+        </h2>
         <!-- Panel body -->
         <div class="panel-body">
 
             <div class="row">
                 <!---Popular Movies List-->
                 <div class="col-lg-4">
-                    @foreach (var item in Model.movies)
-                    {
-                        <div class=" titleList" id="@item.id" onclick="loadDetails(id)">
-
-                            @item.title
-                        </div>
-
-                        <label hidden id="@item.id poster">@item.poster_path</label>
-                        <label hidden id="@item.id overview">@item.overview</label>
-                        <label hidden id="@item.id title">@item.title</label>
-                        <label hidden id=" @item.id release">@item.release_date</label>
-                        <label hidden id=" @item.id rating">@item.vote_average</label>
-                        <label hidden id=" @item.id votes">@item.vote_count</label>
-                        foreach (var genre in item.genre_ids)
+                    <div class="row">
+                        @foreach (var item in Model.movies)
                         {
-                            <label hidden class="@item.id gennres-ids">@genre</label>
+                            <div class=" titleList" id="@item.id" onclick="loadDetails(id)">
+
+                                @item.title
+                            </div>
+
+                            <label hidden id="@item.id poster">@item.poster_path</label>
+                            <label hidden id="@item.id overview">@item.overview</label>
+                            <label hidden id="@item.id title">@item.title</label>
+                            <label hidden id=" @item.id release">@item.release_date</label>
+                            <label hidden id=" @item.id rating">@item.vote_average</label>
+                            <label hidden id=" @item.id votes">@item.vote_count</label>
+                            foreach (var genre in item.genre_ids)
+                            {
+                                <label hidden class="@item.id gennres-ids">@genre</label>
+                            }
+
                         }
 
-                    }
+                    </div>
+                    <h4 class="row centerAl">Page @Model.pageNum of 500</h4>
                     <hr style="height:5px" />
+                    <div class="row">
+                        <div class="col-xs-6 col-md-3">
+                            @Html.ActionLink("Page 1", "Index", "Home", new { page = 1 }, new { @class = "btn btn-default pageBtn" })
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            @Html.ActionLink("Previous", "Index", "Home", new { page = Model.pageNum - 1 }, new { @class = "btn btn-default pageBtn" })
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default pageBtn" })
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            @Html.ActionLink("Page 500", "Index", "Home", new { page = 500 }, new { @class = "btn btn-default pageBtn" })
+                        </div>
+                    </div>
 
                     @*<div class="col-lg-2"></div>*@
 
-                    <div class="col-xs-6 col-md-3">
-                        @Html.ActionLink("First", "Index", "Home", new { page = 1 }, new { @class = "btn btn-default pageBtn" })
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        @Html.ActionLink("Previous", "Index", "Home", new { page = Model.pageNum - 1 }, new { @class = "btn btn-default pageBtn" })
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        @Html.ActionLink("Next", "Index", "Home", new { page = Model.pageNum + 1 }, new { @class = "btn btn-default pageBtn" })
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        @Html.ActionLink("Last", "Index", "Home", new { page = 500 }, new { @class = "btn btn-default pageBtn" })
-                    </div>
                 </div>
+                @*<div class="col-md-1"></div>*@
                 @*<hr style="height:5px" />*@
                 <div class="col-lg-8">
                     <div class="row">

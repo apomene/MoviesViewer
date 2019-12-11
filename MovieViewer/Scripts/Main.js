@@ -97,9 +97,9 @@ function HighlightSelection(id) {
     $('#' + id).addClass('titleListSelected');
 }
 
-function AdjustPoster() {  //TO DO: Refactor, naive logic 
+function AdjustPoster() {  //TO DO: Refactor, plain logic 
     var windowWidth = $(window).width();
-    if (windowWidth <= 400) {
+    if (windowWidth <= 440) {
         var imageSource = $("#imagePoster").attr("src");
         var newImageSource = imageSource.replace(posterSizes[3], posterSizes[2]); 
         $("#imagePoster").attr("src", newImageSource);

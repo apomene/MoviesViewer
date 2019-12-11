@@ -30,6 +30,7 @@ textarea {
 
 .pageBtn {
     width:81px !important;
+    margin:2px;
 }
 
 .titleList {
@@ -49,12 +50,14 @@ textarea {
     border: solid;
     border-color: white;
     border-bottom-color:cornflowerblue;
+    margin:3px;
 }
 
 .Overview-bordered{
     background-color:lightgray;
     border:solid;
     border-color:darkgray;
+    margin:3px;
 }
 
 .gennres-tag {
