@@ -54,7 +54,7 @@ namespace MovieViewer.Controllers
             return Json(result);
         }
        /// <summary>
-       /// Calculate weighted rating based bot on votes count and votes average
+       /// Calculate weighted rating based both on votes count and votes average
        /// </summary>
        /// <param name="votes">votes count</param>
        /// <param name="votesAverage">votes average</param>
