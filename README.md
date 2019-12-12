@@ -10,6 +10,8 @@ Application built using ASP.NET (.NET 4.6.1) Server Side and Javascript on Front
 
 2.Build the Solution (Ctrl+Shift+B or using the Build button found on VS tasks bar)
 
-3.Publish App on preferred methods and targets  (see image below)
+3.Publish App using preferred methods and targets  (see image below)
 
 ![Screenshot](Publish.png)
+
+
